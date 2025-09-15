@@ -20,9 +20,7 @@ $moduleId = $module->id ?? 0;
 
 $user = Factory::getUser();
 
-// Permission: require manage (administrator) permission to view the list
 if (!$user->authorise('core.manage')) {
-    // show a simple unauthorized message
     echo '<div class="alert alert-warning">' . htmlspecialchars(Text::_('MOD_USERLIST_ADMIN_NOT_AUTHORIZED'), ENT_QUOTES, 'UTF-8') . '</div>';
     return;
 }
@@ -34,7 +32,6 @@ $limit = (int) $params->get('limit', 20);
 $orderBy = $params->get('order_by', 'id');
 $orderDir = strtoupper($params->get('order_dir', 'ASC')) === 'DESC' ? 'DESC' : 'ASC';
 
-// Allowed order columns for safety
 $allowedOrder = ['id', 'name', 'username', 'email', 'registerDate'];
 if (!in_array($orderBy, $allowedOrder, true)) {
     $orderBy = 'id';

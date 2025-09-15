@@ -24,7 +24,6 @@ class ModUserListAdminHelper
         $db = Factory::getDbo();
         $query = $db->getQuery(true);
 
-        // Map friendly names to actual columns (and handle registerDate separately)
         $colMap = [
             'id' => $db->quoteName('id'),
             'name' => $db->quoteName('name'),
@@ -44,7 +43,6 @@ class ModUserListAdminHelper
         try {
             $rows = $db->loadObjectList();
         } catch (RuntimeException $e) {
-            // On DB error, return empty array
             return [];
         }
 
